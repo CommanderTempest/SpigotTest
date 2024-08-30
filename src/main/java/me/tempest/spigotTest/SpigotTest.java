@@ -1,5 +1,6 @@
 package me.tempest.spigotTest;
 
+import me.tempest.spigotTest.listeners.XPBottleBreakListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedLeaveEvent;
@@ -15,6 +16,7 @@ public final class SpigotTest extends JavaPlugin implements Listener {
         // Plugin startup logic
         System.out.println("First Plugin has started");
         getServer().getPluginManager().registerEvents(this, this);
+        getServer().getPluginManager().registerEvents(new XPBottleBreakListener(), this);
     }
 
     @Override
