@@ -1,6 +1,7 @@
 package me.tempest.spigotTest;
 
 import me.tempest.spigotTest.commands.GodCommand;
+import me.tempest.spigotTest.listeners.DeathListener;
 import me.tempest.spigotTest.listeners.JoinLeaveListener;
 import me.tempest.spigotTest.listeners.XPBottleBreakListener;
 import org.bukkit.command.Command;
@@ -15,15 +16,26 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 // https://hub.spigotmc.org/javadocs/bukkit/
 
+/**
+**TODO
+ * Look up custom inventories, custom items, how to make, etc.
+ * Look up custom entities
+ * Take a look at how holograms are done
+ **/
+
 public final class SpigotTest extends JavaPlugin implements Listener {
+
+    private static SpigotTest plugin;
 
     @Override
     public void onEnable() {
+        plugin = this;
         // Plugin startup logic
         System.out.println("First Plugin has started");
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new XPBottleBreakListener(), this);
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(), this);
+        getServer().getPluginManager().registerEvents(new DeathListener(), this);
         getCommand("god").setExecutor(new GodCommand());
     }
 
@@ -61,5 +73,10 @@ public final class SpigotTest extends JavaPlugin implements Listener {
             }
         }
         return true;
+    }
+
+    public static SpigotTest getPlugin()
+    {
+        return plugin;
     }
 }
