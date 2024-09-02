@@ -8,4 +8,11 @@ website: https://stormur.netlify.app/
 commands:
   die:
     description: sets sending player's hp to 0
-    usage: /die
+    usage: /<command>
+  god:
+    description: makes player invulnerable
+    usage: /<command>
+    aliases:
+      - invulnerable
+      - invincible
+      - babydonthurtme

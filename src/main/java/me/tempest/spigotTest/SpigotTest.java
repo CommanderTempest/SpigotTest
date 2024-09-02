@@ -1,5 +1,6 @@
 package me.tempest.spigotTest;
 
+import me.tempest.spigotTest.commands.GodCommand;
 import me.tempest.spigotTest.listeners.JoinLeaveListener;
 import me.tempest.spigotTest.listeners.XPBottleBreakListener;
 import org.bukkit.command.Command;
@@ -23,6 +24,7 @@ public final class SpigotTest extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new XPBottleBreakListener(), this);
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(), this);
+        getCommand("god").setExecutor(new GodCommand());
     }
 
     @Override
