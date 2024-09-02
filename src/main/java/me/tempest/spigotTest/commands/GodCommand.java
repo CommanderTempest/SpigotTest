@@ -12,17 +12,14 @@ public class GodCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player player) {
 
-            if (player.isInvulnerable()) {
-                player.setInvulnerable(false);
-                player.sendMessage(ChatColor.RED + "God mode has been disabled.");
-            }
-            else {
-                player.setInvulnerable(true);
-                player.sendMessage(ChatColor.RED + "God mode has been enabled.");
-            }
-
-            if (command.getName().equalsIgnoreCase("god")) {
-
+            if (player.hasPermission("spigottest.god")) {
+                if (player.isInvulnerable()) {
+                    player.setInvulnerable(false);
+                    player.sendMessage(ChatColor.RED + "God mode has been disabled.");
+                } else {
+                    player.setInvulnerable(true);
+                    player.sendMessage(ChatColor.RED + "God mode has been enabled.");
+                }
             }
         }
 

@@ -12,7 +12,14 @@ commands:
   god:
     description: makes player invulnerable
     usage: /<command>
+    permission: spigottest.god
     aliases:
       - invulnerable
       - invincible
       - babydonthurtme
+permissions:
+  spigottest.god:
+    description: the permission that allows you to use the /god command
+    default: not op
+    children:
+      spigottest.die: true
