@@ -5,3 +5,7 @@ api-version: '1.21'
 authors: [ Commander Tempest ]
 description: First Plugin
 website: https://stormur.netlify.app/
+commands:
+  die:
+    description: sets sending player's hp to 0
+    usage: /die
