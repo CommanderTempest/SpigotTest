@@ -11,12 +11,18 @@ commands:
     usage: /<command>
   god:
     description: makes player invulnerable
-    usage: /<command>
+    usage: /<command> <player>
     permission: spigottest.god
     aliases:
       - invulnerable
       - invincible
       - babydonthurtme
+  setspawn:
+    description: sets player spawn location
+    usage: /<command>
+  spawn:
+    description: teleports you to your spawn location
+    usage: /<command>
 permissions:
   spigottest.god:
     description: the permission that allows you to use the /god command

@@ -1,6 +1,8 @@
 package me.tempest.spigotTest.listeners;
 
+import me.tempest.spigotTest.SpigotTest;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -28,6 +30,11 @@ public class JoinLeaveListener implements Listener {
             // load last played class woh
 
             player.sendMessage(ChatColor.YELLOW + "Welcome back " + player.getDisplayName());
+            Location location = SpigotTest.getPlugin().getConfig().getLocation("spawn");
+            if (location != null)
+            {
+                player.teleport(location);
+            }
         }
         else
         {

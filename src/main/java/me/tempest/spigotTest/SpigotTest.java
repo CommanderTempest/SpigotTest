@@ -1,8 +1,11 @@
 package me.tempest.spigotTest;
 
 import me.tempest.spigotTest.commands.GodCommand;
+import me.tempest.spigotTest.commands.SetSpawn;
+import me.tempest.spigotTest.commands.SpawnCommand;
 import me.tempest.spigotTest.listeners.DeathListener;
 import me.tempest.spigotTest.listeners.JoinLeaveListener;
+import me.tempest.spigotTest.listeners.SpawnListeners;
 import me.tempest.spigotTest.listeners.XPBottleBreakListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -30,13 +33,22 @@ public final class SpigotTest extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         plugin = this;
+        // config.yml
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
+
         // Plugin startup logic
         System.out.println("First Plugin has started");
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new XPBottleBreakListener(), this);
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(), this);
         getServer().getPluginManager().registerEvents(new DeathListener(), this);
+        getServer().getPluginManager().registerEvents(new SpawnListeners(), this);
         getCommand("god").setExecutor(new GodCommand());
+        getCommand("setspawn").setExecutor(new SetSpawn());
+        getCommand("spawn").setExecutor(new SpawnCommand());
+
+
     }
 
     @Override
