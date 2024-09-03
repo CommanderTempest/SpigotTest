@@ -24,6 +24,13 @@ public class JoinLeaveListener implements Listener {
     public void onJoin(PlayerJoinEvent e)
     {
         Player player = e.getPlayer();
+        String joinMessage = SpigotTest.getPlugin().getConfig().getString("join-message");
+
+        if (joinMessage != null)
+        {
+            joinMessage = joinMessage.replace("%player%", e.getPlayer().getDisplayName());
+            player.sendMessage(joinMessage);
+        }
 
         if (player.hasPlayedBefore())
         {
