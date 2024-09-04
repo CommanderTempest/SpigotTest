@@ -1,12 +1,10 @@
 package me.tempest.spigotTest;
 
 import me.tempest.spigotTest.commands.GodCommand;
+import me.tempest.spigotTest.commands.MenuCommand;
 import me.tempest.spigotTest.commands.SetSpawn;
 import me.tempest.spigotTest.commands.SpawnCommand;
-import me.tempest.spigotTest.listeners.DeathListener;
-import me.tempest.spigotTest.listeners.JoinLeaveListener;
-import me.tempest.spigotTest.listeners.SpawnListeners;
-import me.tempest.spigotTest.listeners.XPBottleBreakListener;
+import me.tempest.spigotTest.listeners.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -44,9 +42,11 @@ public final class SpigotTest extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new JoinLeaveListener(), this);
         getServer().getPluginManager().registerEvents(new DeathListener(), this);
         getServer().getPluginManager().registerEvents(new SpawnListeners(), this);
+        getServer().getPluginManager().registerEvents(new InventoryListener(), this);
         getCommand("god").setExecutor(new GodCommand());
         getCommand("setspawn").setExecutor(new SetSpawn());
         getCommand("spawn").setExecutor(new SpawnCommand());
+        getCommand("menu").setExecutor(new MenuCommand());
 
 
     }

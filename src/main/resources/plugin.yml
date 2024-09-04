@@ -23,6 +23,9 @@ commands:
   spawn:
     description: teleports you to your spawn location
     usage: /<command>
+  menu:
+    description: gives you some items
+    usage: /<command>
 permissions:
   spigottest.god:
     description: the permission that allows you to use the /god command
