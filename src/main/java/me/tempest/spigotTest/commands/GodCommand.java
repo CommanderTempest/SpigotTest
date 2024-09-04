@@ -7,7 +7,21 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 public class GodCommand implements CommandExecutor {
+
+    // key == UUID of player
+    // long = epoch time of when they ran the command
+    private final HashMap<UUID, Long> cooldown;
+
+    private final long duration = 2000;
+
+    public GodCommand()
+    {
+        this.cooldown = new HashMap<>();
+    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
@@ -29,7 +43,22 @@ public class GodCommand implements CommandExecutor {
         else if (args.length == 0)
         {
             if (commandSender instanceof Player player) {
-                setInvuln(player, player);
+                if (!this.cooldown.containsKey(player.getUniqueId()))
+                {
+                    this.cooldown.put(player.getUniqueId(), System.currentTimeMillis());
+                    setInvuln(player, player);
+                }
+                else {
+                    long timeElapsed = System.currentTimeMillis() - this.cooldown.get(player.getUniqueId());
+                    if (timeElapsed > this.duration)
+                    {
+                        setInvuln(player, player);
+                        this.cooldown.replace(player.getUniqueId(), System.currentTimeMillis());
+                    }
+                    else {
+                        player.sendMessage("You cannot use that command again for another " + (this.duration - timeElapsed) + " milliseconds!");
+                    }
+                }
             }
         }
         else {
