@@ -1,9 +1,6 @@
 package me.tempest.spigotTest;
 
-import me.tempest.spigotTest.commands.GodCommand;
-import me.tempest.spigotTest.commands.MenuCommand;
-import me.tempest.spigotTest.commands.SetSpawn;
-import me.tempest.spigotTest.commands.SpawnCommand;
+import me.tempest.spigotTest.commands.*;
 import me.tempest.spigotTest.listeners.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -19,9 +16,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
 **TODO
- * Look up custom inventories, custom items, how to make, etc.
+ * (COMPLETED) Look up custom inventories, custom items, how to make, etc.
  * Look up custom entities
  * Take a look at how holograms are done
+ * Look at MongoDB
  **/
 
 public final class SpigotTest extends JavaPlugin implements Listener {
@@ -47,6 +45,7 @@ public final class SpigotTest extends JavaPlugin implements Listener {
         getCommand("setspawn").setExecutor(new SetSpawn());
         getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("menu").setExecutor(new MenuCommand());
+        getCommand("spawnentity").setExecutor(new SpawnEntityCommand());
 
 
     }

@@ -26,6 +26,9 @@ commands:
   menu:
     description: gives you some items
     usage: /<command>
+  spawnentity:
+    description: spawns a turtle at world origin
+    usage: /<command>
 permissions:
   spigottest.god:
     description: the permission that allows you to use the /god command
