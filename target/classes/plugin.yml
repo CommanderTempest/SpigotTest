@@ -5,3 +5,33 @@ api-version: '1.21'
 authors: [ Commander Tempest ]
 description: First Plugin
 website: https://stormur.netlify.app/
+commands:
+  die:
+    description: sets sending player's hp to 0
+    usage: /<command>
+  god:
+    description: makes player invulnerable
+    usage: /<command> <player>
+    permission: spigottest.god
+    aliases:
+      - invulnerable
+      - invincible
+      - babydonthurtme
+  setspawn:
+    description: sets player spawn location
+    usage: /<command>
+  spawn:
+    description: teleports you to your spawn location
+    usage: /<command>
+  menu:
+    description: gives you some items
+    usage: /<command>
+  spawnentity:
+    description: spawns a turtle at world origin
+    usage: /<command>
+permissions:
+  spigottest.god:
+    description: the permission that allows you to use the /god command
+    default: not op
+    children:
+      spigottest.die: true
