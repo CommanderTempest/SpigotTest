@@ -5,6 +5,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import me.tempest.spigotTest.commands.*;
 import me.tempest.spigotTest.listeners.*;
+import me.tempest.spigotTest.tasks.MyTask;
 import org.bson.Document;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -15,6 +16,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedLeaveEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scheduler.BukkitTask;
 
 // https://hub.spigotmc.org/javadocs/bukkit/
 
@@ -60,6 +63,16 @@ public final class SpigotTest extends JavaPlugin implements Listener {
         getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("menu").setExecutor(new MenuCommand());
         getCommand("spawnentity").setExecutor(new SpawnEntityCommand());
+
+        // Tasks
+        BukkitTask task = new MyTask().runTaskLater(this, 200);
+        BukkitScheduler schedule = getServer().getScheduler();
+        schedule.runTaskLater(this, new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Anon task");
+            }
+        }, 20L);
 
 
     }
