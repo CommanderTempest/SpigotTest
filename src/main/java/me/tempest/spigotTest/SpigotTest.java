@@ -18,6 +18,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 // https://hub.spigotmc.org/javadocs/bukkit/
 
@@ -32,6 +34,7 @@ import org.bukkit.scheduler.BukkitTask;
 public final class SpigotTest extends JavaPlugin implements Listener {
 
     private static SpigotTest plugin;
+    public static JedisPool pool;
 
     @Override
     public void onEnable() {
@@ -43,6 +46,9 @@ public final class SpigotTest extends JavaPlugin implements Listener {
         // MongoDB Connection
         MongoClient mongoClient = MongoClients.create("mongodb+srv://krukovtempest:tEAjiygHEc25AoA4@spigotlearn.o0vh7.mongodb.net/?retryWrites=true&w=majority&appName=SpigotLearn");
         MongoCollection<Document> collection = mongoClient.getDatabase("SpigotLearning").getCollection("users");
+
+        // Redis
+        pool = new JedisPool("127.0.0.1", 80);
 
         System.out.println("Connected to Database");
         Document document1 = new Document("name", "Tempest")
@@ -75,11 +81,25 @@ public final class SpigotTest extends JavaPlugin implements Listener {
             }
         }, 20L);
 
+        // Redis Practice Connection
+        Jedis j = null;
+        try {
+            j = pool.getResource();
+            j.auth("123456789");
+            j.set("key", "value");
+            System.out.println(j.get("key"));
+        } finally {
+            j.close();
+        }
+
 
     }
 
     @Override
     public void onDisable() {
+
+        // Redis close
+        pool.close();
         // Plugin shutdown logic
         System.out.println("Plugin has shut down");
     }
