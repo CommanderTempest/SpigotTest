@@ -63,6 +63,7 @@ public final class SpigotTest extends JavaPlugin implements Listener {
         getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("menu").setExecutor(new MenuCommand());
         getCommand("spawnentity").setExecutor(new SpawnEntityCommand());
+        getCommand("gameover").setExecutor(new GameOverCommand());
 
         // Tasks
         BukkitTask task = new MyTask().runTaskLater(this, 200);
