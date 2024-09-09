@@ -1,5 +1,12 @@
 package me.tempest.spigotTest;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
+import com.comphenix.protocol.events.ListenerPriority;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.events.PacketEvent;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -10,6 +17,7 @@ import org.bson.Document;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,6 +47,8 @@ public final class SpigotTest extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         plugin = this;
+        ProtocolManager manager = ProtocolLibrary.getProtocolManager();
+
         // config.yml
         getConfig().options().copyDefaults();
         saveDefaultConfig();
@@ -70,6 +80,7 @@ public final class SpigotTest extends JavaPlugin implements Listener {
         getCommand("menu").setExecutor(new MenuCommand());
         getCommand("spawnentity").setExecutor(new SpawnEntityCommand());
         getCommand("gameover").setExecutor(new GameOverCommand());
+        getCommand("boom").setExecutor(new BoomCommand());
 
         // Tasks
         BukkitTask task = new MyTask().runTaskLater(this, 200);
@@ -92,6 +103,49 @@ public final class SpigotTest extends JavaPlugin implements Listener {
             j.close();
         }
 
+        // Listening to incoming packet client -> server
+        manager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.POSITION) {
+            @Override
+            public void onPacketReceiving(PacketEvent event) {
+                PacketContainer packet = event.getPacket();
+                Player p = event.getPlayer();
+
+                double x = packet.getDoubles().read(0);
+                double y = packet.getDoubles().read(1);
+                double z = packet.getDoubles().read(2);
+                boolean isOnGround = packet.getBooleans().read(0);
+
+                p.sendMessage("Inbound: x: " + x + " y: " + y + " z: " + z);
+                p.sendMessage("On ground? " + isOnGround);
+
+            }
+        });
+        // server -> client
+        manager.addPacketListener(new PacketAdapter(this, PacketType.Play.Server.REL_ENTITY_MOVE) {
+            @Override
+            public void onPacketSending(PacketEvent event) {
+                PacketContainer packet = event.getPacket();
+                Player p = event.getPlayer();
+                short x = packet.getShorts().read(0);
+                short y = packet.getShorts().read(1);
+                short z = packet.getShorts().read(2);
+                int entityID = packet.getIntegers().read(0);
+
+                Entity entity = manager.getEntityFromID(p.getWorld(), entityID);
+
+                // hehe
+                //entity.teleport(p.getLocation());
+
+                p.sendMessage("Outbound: x: " + x + " y: " + y + " z: " + z);
+            }
+        });
+
+        manager.addPacketListener(new PacketAdapter(this, PacketType.Play.Client.CHAT) {
+            @Override
+            public void onPacketReceiving(PacketEvent event) {
+                event.setCancelled(true);
+            }
+        });
 
     }
 

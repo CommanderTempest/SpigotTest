@@ -32,9 +32,13 @@ commands:
   gameover:
     description: ends a game
     usage: /<command>
+  boom:
+    description: explosion
+    usage: /<command>
 permissions:
   spigottest.god:
     description: the permission that allows you to use the /god command
     default: not op
     children:
       spigottest.die: true
+depend: [ProtocolLib]
