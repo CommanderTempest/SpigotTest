@@ -35,6 +35,9 @@ commands:
   boom:
     description: explosion
     usage: /<command>
+  spawnhologram:
+    description: spawns a hologram
+    usage: /<command>
 permissions:
   spigottest.god:
     description: the permission that allows you to use the /god command

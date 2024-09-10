@@ -17,6 +17,7 @@ me\tempest\spigotTest\commands\SpawnCommand.class
 me\tempest\spigotTest\listeners\InventoryListener.class
 me\tempest\spigotTest\listeners\MenuListener$1.class
 me\tempest\spigotTest\commands\GodCommand.class
+me\tempest\spigotTest\commands\SpawnHologram.class
 me\tempest\spigotTest\commands\GameOverCommand.class
 me\tempest\spigotTest\SpigotTest$2.class
 me\tempest\spigotTest\listeners\GameListeners.class
