@@ -8,6 +8,7 @@ me\tempest\spigotTest\listeners\JoinLeaveListener.class
 me\tempest\spigotTest\commands\BoomCommand.class
 me\tempest\spigotTest\listeners\XPBottleBreakListener.class
 me\tempest\spigotTest\commands\SetSpawn.class
+me\tempest\spigotTest\commands\CreateCommand.class
 me\tempest\spigotTest\events\GameEndEvent.class
 me\tempest\spigotTest\SpigotTest$3.class
 me\tempest\spigotTest\tasks\MyTask.class
