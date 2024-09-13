@@ -6,6 +6,7 @@ me\tempest\spigotTest\SpigotTest$4.class
 me\tempest\spigotTest\SpigotTest$1.class
 me\tempest\spigotTest\listeners\JoinLeaveListener.class
 me\tempest\spigotTest\commands\BoomCommand.class
+me\tempest\spigotTest\commands\CreateCommand$1.class
 me\tempest\spigotTest\listeners\XPBottleBreakListener.class
 me\tempest\spigotTest\commands\SetSpawn.class
 me\tempest\spigotTest\commands\CreateCommand.class
