@@ -2,6 +2,7 @@ package me.tempest.spigotTest.commands;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import com.mojang.datafixers.util.Pair;
 import me.tempest.spigotTest.SpigotTest;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.*;
@@ -11,14 +12,19 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
+import net.minecraft.world.entity.EquipmentSlot;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_21_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_21_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 public class CreateCommand implements CommandExecutor {
@@ -58,6 +64,13 @@ public class CreateCommand implements CommandExecutor {
             }, 40);
             //ps.send(new ClientboundAddEntityPacket(sp));
             //ps.send(new ClientboundAddEntityPacket(npc));
+
+            ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+            ps.send(new ClientboundSetEquipmentPacket(npc.getBukkitEntity().getEntityId(), List.of(
+                    new Pair<>(EquipmentSlot.MAINHAND, CraftItemStack.asNMSCopy(sword)),
+                    new Pair<>(EquipmentSlot.BODY, CraftItemStack.asNMSCopy(new ItemStack(Material.DIAMOND_CHESTPLATE)))
+                )
+            ));
         }
 
         return true;
