@@ -71,6 +71,8 @@ public class CreateCommand implements CommandExecutor {
                     new Pair<>(EquipmentSlot.BODY, CraftItemStack.asNMSCopy(new ItemStack(Material.DIAMOND_CHESTPLATE)))
                 )
             ));
+
+            SpigotTest.getPlayerList().add(npc);
         }
 
         return true;

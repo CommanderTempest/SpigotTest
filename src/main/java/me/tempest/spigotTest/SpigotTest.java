@@ -13,6 +13,7 @@ import com.mongodb.client.MongoCollection;
 import me.tempest.spigotTest.commands.*;
 import me.tempest.spigotTest.listeners.*;
 import me.tempest.spigotTest.tasks.MyTask;
+import net.minecraft.server.level.ServerPlayer;
 import org.bson.Document;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -29,6 +30,9 @@ import org.bukkit.scheduler.BukkitTask;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // https://hub.spigotmc.org/javadocs/bukkit/
 
 /**
@@ -41,6 +45,7 @@ import redis.clients.jedis.JedisPool;
 
 public final class SpigotTest extends JavaPlugin implements Listener {
 
+    private static List<ServerPlayer> playerList = new ArrayList<>();
     private static SpigotTest plugin;
     public static JedisPool pool;
 
@@ -74,6 +79,7 @@ public final class SpigotTest extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new DeathListener(), this);
         getServer().getPluginManager().registerEvents(new SpawnListeners(), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
+        getServer().getPluginManager().registerEvents(new MovementListener(), this);
         getCommand("god").setExecutor(new GodCommand());
         getCommand("setspawn").setExecutor(new SetSpawn());
         getCommand("spawn").setExecutor(new SpawnCommand());
@@ -148,6 +154,10 @@ public final class SpigotTest extends JavaPlugin implements Listener {
             }
         });
 
+    }
+
+    public static List<ServerPlayer> getPlayerList() {
+        return playerList;
     }
 
     @Override
