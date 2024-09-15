@@ -38,6 +38,9 @@ commands:
   spawnhologram:
     description: spawns a hologram
     usage: /<command>
+  questnpc:
+    description: spawns quest NPC
+    usage: /<command>
 permissions:
   spigottest.god:
     description: the permission that allows you to use the /god command

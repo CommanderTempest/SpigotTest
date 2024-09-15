@@ -12,6 +12,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import me.tempest.spigotTest.commands.*;
 import me.tempest.spigotTest.listeners.*;
+import me.tempest.spigotTest.managers.NPCManager;
 import me.tempest.spigotTest.tasks.MyTask;
 import net.minecraft.server.level.ServerPlayer;
 import org.bson.Document;
@@ -48,6 +49,8 @@ public final class SpigotTest extends JavaPlugin implements Listener {
     private static List<ServerPlayer> playerList = new ArrayList<>();
     private static SpigotTest plugin;
     public static JedisPool pool;
+
+    private NPCManager npcManager;
 
     @Override
     public void onEnable() {
@@ -88,6 +91,7 @@ public final class SpigotTest extends JavaPlugin implements Listener {
         getCommand("gameover").setExecutor(new GameOverCommand());
         getCommand("boom").setExecutor(new BoomCommand());
         getCommand("spawnhologram").setExecutor(new SpawnHologram());
+        getCommand("questnpc").setExecutor(new QuestNPCCommand(npcManager));
 
         // Tasks
         BukkitTask task = new MyTask().runTaskLater(this, 200);
