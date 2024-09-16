@@ -7,6 +7,7 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
+import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -128,6 +129,24 @@ public final class SpigotTest extends JavaPlugin implements Listener {
 
                 p.sendMessage("Inbound: x: " + x + " y: " + y + " z: " + z);
                 p.sendMessage("On ground? " + isOnGround);
+
+            }
+        });
+        manager.addPacketListener(new PacketAdapter(this, PacketType.Play.Client.USE_ENTITY) {
+            @Override
+            public void onPacketReceiving(PacketEvent event) {
+                PacketContainer packet = event.getPacket();
+                int entityID = packet.getIntegers().read(0);
+                if (entityID == npcManager.getID() )
+                {
+                    EnumWrappers.Hand hand = packet.getEnumEntityUseActions().read(0).getHand();
+                    EnumWrappers.EntityUseAction action = packet.getEnumEntityUseActions().read(0).getAction();
+
+                    if (hand == EnumWrappers.Hand.MAIN_HAND && action == EnumWrappers.EntityUseAction.INTERACT)
+                    {
+
+                    }
+                }
 
             }
         });

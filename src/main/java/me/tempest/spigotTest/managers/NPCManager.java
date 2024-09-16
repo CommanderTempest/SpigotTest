@@ -31,4 +31,9 @@ public class NPCManager {
 
         this.questNPC = npc;
     }
+
+    public int getID()
+    {
+        return (this.questNPC == null) ? 0 : this.questNPC.getId();
+    }
 }
