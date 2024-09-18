@@ -1,1 +1,9 @@
 join-message: "Welcome to the test server, %player%!"
+quests:
+  kill:
+    quest1:
+      name: Kill some zombies & shiet
+      reward: 100
+      target:
+        type: ZOMBIE
+        count: 1

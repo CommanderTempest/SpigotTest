@@ -14,6 +14,7 @@ import com.mongodb.client.MongoCollection;
 import me.tempest.spigotTest.commands.*;
 import me.tempest.spigotTest.listeners.*;
 import me.tempest.spigotTest.managers.NPCManager;
+import me.tempest.spigotTest.managers.QuestManager;
 import me.tempest.spigotTest.tasks.MyTask;
 import net.minecraft.server.level.ServerPlayer;
 import org.bson.Document;
@@ -48,6 +49,7 @@ import java.util.List;
 public final class SpigotTest extends JavaPlugin implements Listener {
 
     private static List<ServerPlayer> playerList = new ArrayList<>();
+    private QuestManager questManager;
     private static SpigotTest plugin;
     public static JedisPool pool;
 
@@ -57,6 +59,8 @@ public final class SpigotTest extends JavaPlugin implements Listener {
     public void onEnable() {
         plugin = this;
         ProtocolManager manager = ProtocolLibrary.getProtocolManager();
+
+        questManager = new QuestManager();
 
         // config.yml
         getConfig().options().copyDefaults();
@@ -225,5 +229,9 @@ public final class SpigotTest extends JavaPlugin implements Listener {
     public static SpigotTest getPlugin()
     {
         return plugin;
+    }
+
+    public QuestManager getQuestManager() {
+        return this.questManager;
     }
 }
