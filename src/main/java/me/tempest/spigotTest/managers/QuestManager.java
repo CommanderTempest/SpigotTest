@@ -5,11 +5,31 @@ import me.tempest.spigotTest.commands.QuestNPCCommand;
 import me.tempest.spigotTest.models.KillQuest;
 import me.tempest.spigotTest.models.Quest;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class QuestManager {
+
+    private final HashMap<Player, Quest> activeQuests;
+
+    public QuestManager() {
+        this.activeQuests = new HashMap<>();
+    }
+
+    public void giveQuest(Player p, Quest q)
+    {
+        q.setWhenStarted(System.currentTimeMillis());
+        this.activeQuests.put(p,q);
+    }
+
+    public Quest getQuest(Player p)
+    {
+        return activeQuests.get(p);
+    }
+
     public List<Quest> getAvailableQuests()
     {
         List<Quest> quests = new ArrayList<>();

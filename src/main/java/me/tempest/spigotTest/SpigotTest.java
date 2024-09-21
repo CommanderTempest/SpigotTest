@@ -148,15 +148,15 @@ public final class SpigotTest extends JavaPlugin implements Listener {
 
                     if (hand == EnumWrappers.Hand.MAIN_HAND && action == EnumWrappers.EntityUseAction.INTERACT)
                     {
-                        getServer().getScheduler().runTask(plugin, () -> {
-                            try {
-                                // open npc quest menu
-                            }
-                            catch (MenuManagerException e)
-                            {
-                                e.printStackTrace();
-                            }
-                        });
+//                        getServer().getScheduler().runTask(plugin, () -> {
+//                            try {
+//                                // open npc quest menu
+//                            }
+//                            catch (MenuManagerException e)
+//                            {
+//                                e.printStackTrace();
+//                            }
+//                        });
                     }
                 }
 

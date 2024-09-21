@@ -3,6 +3,7 @@ package me.tempest.spigotTest.menus;
 import me.tempest.spigotTest.SpigotTest;
 import me.tempest.spigotTest.managers.QuestManager;
 import me.tempest.spigotTest.models.KillQuest;
+import me.tempest.spigotTest.models.Quest;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -31,7 +32,28 @@ public class QuestMenu{
 
     public void handleMenu(InventoryClickEvent e)
     {
+        if (e.getCurrentItem().getType() == Material.DIAMOND_SWORD)
+        {
+            String questName = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
 
+            // ?
+            Player p = e.getWhoClicked().getKiller();
+
+            for (Quest quest : questManager.getAvailableQuests())
+            {
+                if (quest.getName().equals(questName))
+                {
+                    Quest pQuest = questManager.getQuest(p);
+                    if (pQuest != null)
+                    {
+
+                    }
+                    else {
+                        questManager.giveQuest(p, quest);
+                    }
+                }
+            }
+        }
     }
 
     public void setMenuItems()
